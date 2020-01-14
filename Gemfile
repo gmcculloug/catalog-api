@@ -20,7 +20,7 @@ end
 
 gem 'acts_as_tenant'
 gem 'jbuilder', '~> 2.0'
-gem "pg", "~>0.18.2", :require => false
+gem "pg", "~>1.2.2", :require => false
 gem 'puma', '~> 3.0'
 gem 'rack-cors'
 gem 'rest-client'
