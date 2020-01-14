@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 
-gem 'rails', '>= 5.0.0.racecar1', '< 5.1'
+gem 'rails', '>= 5.0.0.racecar1', '< 6.1'
 
 
 group :development, :test do
