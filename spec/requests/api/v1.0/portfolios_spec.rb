@@ -90,6 +90,25 @@ describe "v1.0 - Portfolios API", :type => [:request, :v1] do
         expect(names).to match_array [portfolio_filter1.name, portfolio_filter2.name]
       end
     end
+
+    context "sorted results via sort_by" do
+      let!(:portfolio_filter1) { create(:portfolio, :name => "sort_by_a") }
+      let!(:portfolio_filter2) { create(:portfolio, :name => "sort_by_b") }
+
+      it "available for sources with default order" do
+        get("#{api_version}/portfolios?filter[name][starts_with]=sort_by_&sort_by=name", :headers => default_headers)
+
+        expect(response.status).to eq(200)
+        expect(response.parsed_body["data"].collect { |source| source["name"] }).to eq(%w[sort_by_a sort_by_b])
+      end
+
+      it "available for sources with desc order" do
+        get("#{api_version}/portfolios?filter[name][starts_with]=sort_by_&sort_by=name:desc", :headers => default_headers)
+
+        expect(response.status).to eq(200)
+        expect(response.parsed_body["data"].collect { |source| source["name"] }).to eq(%w[sort_by_b sort_by_a])
+      end
+    end
   end
 
   describe '/portfolios', :type => :routing do
